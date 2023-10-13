@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Favourites from "./components/Favourites";
+import { Route, Routes } from "react-router-dom";
+import Home from "./components/Home";
 
-function App() {
+const App = () => {
+  const [tags, setTags] = useState([]);
+  const [favs, setFavs] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home tags={tags} setTags={setTags} favs={favs} setFavs={setFavs} />
+          }
+        />
+        <Route
+          path="/favourites"
+          element={<Favourites favs={favs} setFavs={setFavs} />}
+        />
+      </Routes>
     </div>
   );
-}
+};
 
 export default App;
